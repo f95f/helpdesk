@@ -1,22 +1,32 @@
 package com.estudo.helpdesk.domain;
 
 import com.estudo.helpdesk.domain.enums.Profiles;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import jakarta.persistence.*;
 import org.springframework.cglib.core.Local;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
-
-public abstract class Person {
-
+@Entity
+public abstract class Person implements Serializable {
+    //TODO implement SerialVersionUID?
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected Integer id;
+    @Column(unique = true)
     protected String cpf;
     protected String name;
+    @Column(unique = true)
     protected String email;
     protected String senha;
+    @ElementCollection(fetch = FetchType.EAGER)
+    @CollectionTable(name = "perfis")
     protected Set<Integer> roles = new HashSet<>();
+    @JsonFormat(pattern = "dd/MM/yyyy")
     protected LocalDateTime createdAt = LocalDateTime.now();
 
     public Person(){

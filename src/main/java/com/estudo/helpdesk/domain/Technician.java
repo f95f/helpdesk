@@ -2,25 +2,24 @@ package com.estudo.helpdesk.domain;
 
 import com.estudo.helpdesk.domain.enums.Profiles;
 import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class Client extends Person{
+public class Technician extends Person{
 
-    @OneToMany(mappedBy = "client")
+    @OneToMany(mappedBy = "technician")
     private List<Chamado> chamados = new ArrayList<>();
 
-    public Client() {
+    public Technician() {
         super();
-        addRoles(Profiles.CLIENTE);
+        addRoles(Profiles.TECNICO);
     }
-    public Client(Integer id, String cpf, String name, String email, String senha) {
+    public Technician(Integer id, String cpf, String name, String email, String senha) {
         super(id, cpf, name, email, senha);
-        addRoles(Profiles.CLIENTE);
+        addRoles(Profiles.TECNICO);
     }
 
     public List<Chamado> getChamados() {

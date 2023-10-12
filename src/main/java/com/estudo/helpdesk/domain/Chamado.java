@@ -2,17 +2,30 @@ package com.estudo.helpdesk.domain;
 
 import com.estudo.helpdesk.domain.enums.Priorities;
 import com.estudo.helpdesk.domain.enums.Status;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import jakarta.persistence.*;
+
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
-public class Chamado {
+@Entity
+public class Chamado implements Serializable {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    @JsonFormat(pattern = "dd/MM/yy")
     private LocalDateTime createdAt = LocalDateTime.now();
+    @JsonFormat(pattern = "dd/MM/yy")
     private LocalDateTime concludedAt;
     private Priorities priority;
     private Status status;
-    private Tecnician tecnician;
+    @ManyToOne
+    @JoinColumn(name = "tecnico_id")
+    private Technician technician;
+    @ManyToOne
+    @JoinColumn(name = "cliente_id")
     private Client client;
 
     public Chamado(){
@@ -20,11 +33,11 @@ public class Chamado {
         setStatus(Status.STARTED);
     }
 
-    public Chamado(Integer id, Priorities priority, Status status, Tecnician tecnician, Client client) {
+    public Chamado(Integer id, Priorities priority, Status status, Technician technician, Client client) {
         this.id = id;
         this.priority = priority;
         this.status = status;
-        this.tecnician = tecnician;
+        this.technician = technician;
         this.client = client;
         setStatus(Status.STARTED);
     }
@@ -69,12 +82,12 @@ public class Chamado {
         this.status = status;
     }
 
-    public Tecnician getTecnician() {
-        return tecnician;
+    public Technician getTecnician() {
+        return technician;
     }
 
-    public void setTecnician(Tecnician tecnician) {
-        this.tecnician = tecnician;
+    public void setTecnician(Technician technician) {
+        this.technician = technician;
     }
 
     public Client getClient() {
