@@ -21,6 +21,8 @@ public class Chamado implements Serializable {
     private LocalDateTime concludedAt;
     private Priorities priority;
     private Status status;
+    private String title;
+    private String description;
     @ManyToOne
     @JoinColumn(name = "tecnico_id")
     private Technician technician;
@@ -28,16 +30,19 @@ public class Chamado implements Serializable {
     @JoinColumn(name = "cliente_id")
     private Client client;
 
+
     public Chamado(){
         super();
         setStatus(Status.STARTED);
     }
 
-    public Chamado(Integer id, Priorities priority, Status status, Technician technician, Client client) {
+    public Chamado(Integer id, Priorities priority, Status status, String title, String description, Technician technician, Client client) {
         this.id = id;
         this.priority = priority;
         this.status = status;
         this.technician = technician;
+        this.title = title;
+        this.description = description;
         this.client = client;
         setStatus(Status.STARTED);
     }
@@ -96,6 +101,22 @@ public class Chamado implements Serializable {
 
     public void setClient(Client client) {
         this.client = client;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     @Override
