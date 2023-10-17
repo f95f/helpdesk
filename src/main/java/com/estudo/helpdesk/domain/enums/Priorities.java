@@ -30,11 +30,8 @@ public enum Priorities {
             if(id.equals(x.getId())){
                 return x;
             }
-            else{
-                throw new IllegalArgumentException("Erro: Valor de prioridade inexistente.");
-            }
         }
-        return null;
+        throw new IllegalArgumentException("Erro: Valor de prioridade inexistente.");
 
     }
 

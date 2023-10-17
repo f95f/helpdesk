@@ -13,7 +13,8 @@ import java.util.Set;
 import java.util.stream.Collectors;
 @Entity
 public abstract class Person implements Serializable {
-    //TODO implement SerialVersionUID?
+    private static final long serialVersionUID = 1L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected Integer id;

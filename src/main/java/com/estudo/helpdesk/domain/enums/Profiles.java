@@ -27,11 +27,7 @@ public enum Profiles {
             if(id.equals(x.getId())){
                 return x;
             }
-            else{
-                throw new IllegalArgumentException("Erro: Perfil inexistente.");
-            }
         }
-        return null;
-
+        throw new IllegalArgumentException("Erro: Perfil inexistente.");
     }
 }

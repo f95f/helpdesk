@@ -3,6 +3,7 @@ package com.estudo.helpdesk.domain;
 import com.estudo.helpdesk.domain.enums.Priorities;
 import com.estudo.helpdesk.domain.enums.Status;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -11,6 +12,7 @@ import java.util.Objects;
 
 @Entity
 public class Chamado implements Serializable {
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,9 +25,11 @@ public class Chamado implements Serializable {
     private Status status;
     private String title;
     private String description;
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "tecnico_id")
     private Technician technician;
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "cliente_id")
     private Client client;
